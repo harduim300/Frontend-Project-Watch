@@ -2,16 +2,18 @@
   import AuthForm from '@/components/ui/AuthForm.vue';
   import { authService } from '@/services/auth'
   import { useRouter } from 'vue-router'
+  import { ref } from 'vue'
 
   const router = useRouter()
+  const errorMessage = ref('')
 
   const onRegisterSubmit = async (data: { name: string, email: string, password: string }) => {
     try {
-      console.log(data)
+      errorMessage.value = ''
       await authService.register(data)
       router.push('/')
-    } catch (error) {
-      console.error('Erro ao fazer registro:', error)
+    } catch (error: any) {
+      errorMessage.value = error.message
     }
   }
 </script>
@@ -26,6 +28,7 @@
     secondaryActionText="Já tem uma conta? Entre aqui"
     secondaryActionLink="/"
     @submit="onRegisterSubmit"
+    :error-message="errorMessage"
   />
   </div>
 </template>

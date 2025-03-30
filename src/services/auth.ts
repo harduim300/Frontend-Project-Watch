@@ -19,8 +19,11 @@ export const authService = {
     try {
       const response = await axios.post(`${API_URL}/auth/login`, data)
       return response.data
-    } catch (error) {
-      throw error
+    } catch (error: any) {
+      if (error.response?.status === 401) {
+        throw new Error('Email ou senha incorretos')
+      }
+      throw new Error('Erro ao fazer login. Tente novamente.')
     }
   },
 
@@ -28,8 +31,11 @@ export const authService = {
     try {
       const response = await axios.post(`${API_URL}/auth/signup`, data)
       return response.data
-    } catch (error) {
-      throw error
+    } catch (error: any) {
+      if (error.response?.status === 409) {
+        throw new Error('Este email já está em uso')
+      }
+      throw new Error('Erro ao fazer registro. Tente novamente.')
     }
   },
 

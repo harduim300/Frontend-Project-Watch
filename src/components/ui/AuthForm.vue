@@ -1,5 +1,5 @@
 <template>
-  <div class="my-8">
+  <div class="my-6">
     <IconLogo
       v-if="showLogo"
       class="mx-auto my-6"
@@ -74,6 +74,15 @@
         :error-messages="confirmPasswordError"
       ></v-text-field>
 
+      <v-alert
+        v-if="errorMessage"
+        type="error"
+        class="mb-4"
+        density="compact"
+      >
+        {{ errorMessage }}
+      </v-alert>
+
       <v-btn
         block
         style="background-color: #ff501a; color: white;"
@@ -85,8 +94,8 @@
 
       <v-card-text class="text-center mt-4">
         <a
-          :href="secondaryActionLink"
-          class="text-caption text-decoration-none text-[#ff501a]"
+          @click.prevent="handleSecondaryAction"
+          class="text-caption text-decoration-none text-[#ff501a] cursor-pointer"
         >
           {{ secondaryActionText }}
         </a>
@@ -98,6 +107,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import IconLogo from '../icons/IconLogo.vue'
+import { useRouter } from 'vue-router'
 
 interface Props {
   showLogo?: boolean
@@ -109,6 +119,7 @@ interface Props {
   secondaryActionText?: string
   secondaryActionLink?: string
   isRegistration?: boolean
+  errorMessage?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -120,12 +131,15 @@ const props = withDefaults(defineProps<Props>(), {
   submitButtonText: 'Log In',
   secondaryActionText: 'Sign up now',
   secondaryActionLink: '#',
-  isRegistration: false
+  isRegistration: false,
+  errorMessage: ''
 })
 
 const emit = defineEmits<{
   (e: 'submit', data: { name?: string, email: string, password: string }): void
 }>()
+
+const router = useRouter()
 
 const visible = ref(false)
 const visibleConfirm = ref(false)
@@ -166,5 +180,9 @@ const handleSubmit = () => {
     password: password.value
   }
   emit('submit', data)
+}
+
+const handleSecondaryAction = () => {
+  router.push(props.secondaryActionLink)
 }
 </script>

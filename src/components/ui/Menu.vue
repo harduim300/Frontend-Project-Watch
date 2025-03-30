@@ -5,13 +5,11 @@
     </template>
 
     <v-list>
-      <v-list-item
-        v-for="(item, i) in items"
-        :key="i"
-        :value="i"
-        @click="item.onClick"
-      >
-        <v-list-item-title>{{ item.title }}</v-list-item-title>
+      <v-list-item @click="handleLogout">
+        <template v-slot:prepend>
+          <v-icon color="error">mdi-logout</v-icon>
+        </template>
+        <v-list-item-title class="text-error">Sair</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-menu>

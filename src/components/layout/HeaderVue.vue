@@ -12,7 +12,9 @@
 </script>
 <template>
     <div class="bg-primary-watch w-full flex justify-between items-center px-9">
-        <IconLogo class="w-[68px] h-[68px]"/>
+        <router-link to="/tasks/dashboard">
+            <IconLogo class="w-[68px] h-[68px]"/>
+        </router-link>
         <Menu/>
     </div>
 </template>

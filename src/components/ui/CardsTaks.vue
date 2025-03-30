@@ -8,20 +8,22 @@
           prepend-icon="mdi-account-multiple"
           color="primary"
           size="small"
-          text="81"
+          :text="task._count.taskUsers.toString()"
           variant="flat"
           ></v-chip>
         </v-card-title>
 
         <div class="py-2">
-          <div class="text-h6">Live Q&A</div>
+          <div class="text-h6">{{ task.title }}</div>
 
-          <div class="font-weight-light text-medium-emphasis">
-            Join the Vuetify team for a live Question and Answer session.
+          <div class="font-weight-light text-medium-emphasis min-w-[360px] w-[360px] text-truncate">
+            {{ task.description }}
           </div>
         </div>
-        <v-chip color="secondary" variant="flat">
-          Secondary
+        <v-chip class="w-auto max-w-40 text-truncate" color="secondary">
+          <div class="text-truncate w-auto max-w-36">
+            {{ task.category }}
+          </div>
         </v-chip>
       </v-card-item>
 
@@ -29,21 +31,21 @@
       <v-divider></v-divider>
 
       <div class="pa-4 d-flex align-center">
-
-        <v-chip color="secondary">
-          Secondary
+        <v-chip :color="getStatusColor(task.status)" variant="flat">
+          {{ getStatusLabel(task.status) }}
         </v-chip>
+
 
         <v-spacer></v-spacer>
 
-        <v-btn icon="mdi-dots-horizontal" variant="text"></v-btn>
 
         <v-btn
           class="me-2 text-none bg-black"
-          prepend-icon="mdi-export-variant"
+          prepend-icon="mdi-account-plus"
           variant="flat"
+          @click="$emit('invite')"
         >
-          Share
+          Convidar
         </v-btn>
 
         <v-btn
@@ -52,15 +54,45 @@
           prepend-icon="mdi-notebook"
           variant="text"
           border
+          @click="$emit('open')"
         >
-          Open
+          Abrir
         </v-btn>
       </div>
     </v-card>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+import type { Task } from '@/services/tasks'
 
-  const taks = ref([]);
+interface Props {
+  task: Task
+}
+
+defineProps<Props>()
+defineEmits(['open', 'invite'])
+
+const statusItems = [
+  { label: 'Não Iniciado', name: 'NOT_STARTED' },
+  { label: 'Em Progresso', name: 'IN_PROGRESS' },
+  { label: 'Concluído', name: 'COMPLETED' }
+]
+
+const getStatusLabel = (status: string) => {
+  const item = statusItems.find(item => item.name === status)
+  return item ? item.label : status
+}
+
+const getStatusColor = (status: string) => {
+  switch (status) {
+    case 'COMPLETED':
+      return 'success'
+    case 'IN_PROGRESS':
+      return 'warning'
+    case 'NOT_STARTED':
+      return 'grey'
+    default:
+      return 'grey'
+  }
+}
 </script>
