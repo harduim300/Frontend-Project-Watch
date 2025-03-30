@@ -13,6 +13,11 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: () => import('../views/RegisterView.vue')
+    },
+    {
+      path: '/tasks/dashboard',
+      name: 'tasks-dashboard',
+      component: () => import('../views/TaksView.vue')
     }
     // {
     //   path: '/login',
