@@ -7,10 +7,14 @@
   const router = useRouter()
   const errorMessage = ref('')
 
-  const onRegisterSubmit = async (data: { name: string, email: string, password: string }) => {
+  const onRegisterSubmit = async (data: { name?: string; email: string; password: string }) => {
     try {
       errorMessage.value = ''
-      await authService.register(data)
+      await authService.register({
+        name: data.name ?? '', // Define uma string vazia caso seja undefined
+        email: data.email,
+        password: data.password
+      })
       router.push('/')
     } catch (error: any) {
       errorMessage.value = error.message

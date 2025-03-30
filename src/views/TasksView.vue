@@ -13,7 +13,7 @@ const isEditDialogOpen = ref(false)
 const isDeleteDialogOpen = ref(false)
 const isAddPeopleDialogOpen = ref(false)
 const selectedTaskId = ref<string | null>(null)
-const selectedTask = ref<Task | null>(null)
+const selectedTask = ref<Task | undefined>(undefined)
 const deleteError = ref('')
 const addPeopleError = ref('')
 

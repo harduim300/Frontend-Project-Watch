@@ -1,35 +1,38 @@
 <template>
-  <v-container>
-    <v-card>
-      <v-card-title module-value="Tarefa" class="text-h4"> Task </v-card-title>
-      <v-card-title class="text-overline">
-        Progress
-
-        <div class="text-green-darken-3 text-h3 font-weight-bold">90%</div>
-      </v-card-title>
-      <br />
-      <v-card-text>
-        <v-progress-linear
-          color="green-darken-3"
-          height="22"
-          model-value="90"
-          rounded="lg"
-        >
-        </v-progress-linear>
-      </v-card-text>
-
-      <v-divider></v-divider>
-
-      <v-list-item
-        append-icon="mdi-chevron-right"
-        lines="two"
-        subtitle="Details and agreement"
-        link
-      ></v-list-item>
-    </v-card>
-  </v-container>
+  <v-card class="progress-card">
+    <v-card-text>
+      <div class="d-flex align-center justify-space-between mb-2">
+        <span class="text-subtitle-2">{{ title }}</span>
+        <span class="text-subtitle-2">{{ value }}/{{ total }}</span>
+      </div>
+      <v-progress-linear
+        :model-value="(value / total) * 100"
+        :color="color"
+        height="8"
+        rounded
+        class="mb-2"
+      ></v-progress-linear>
+      <div class="d-flex align-center">
+        <v-icon :color="color" size="small" class="me-1">{{ icon }}</v-icon>
+        <span class="text-caption">{{ description }}</span>
+      </div>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script setup lang="ts">
-  const review = '30%'
+defineProps<{
+  title: string
+  value: number
+  total: number
+  color: string
+  icon: string
+  description: string
+}>()
 </script>
+
+<style scoped>
+.progress-card {
+  height: 100%;
+}
+</style>

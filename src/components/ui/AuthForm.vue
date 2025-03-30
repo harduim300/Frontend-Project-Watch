@@ -26,6 +26,8 @@
         placeholder="Nome completo"
         prepend-inner-icon="mdi-account-outline"
         variant="outlined"
+        required
+        :rules="[v => !!v || 'Nome é obrigatório']"
       ></v-text-field>
 
       <v-text-field
@@ -135,8 +137,19 @@ const props = withDefaults(defineProps<Props>(), {
   errorMessage: ''
 })
 
+interface LoginData {
+  email: string
+  password: string
+}
+
+interface RegisterData {
+  name: string
+  email: string
+  password: string
+}
+
 const emit = defineEmits<{
-  (e: 'submit', data: { name?: string, email: string, password: string }): void
+  (e: 'submit', data: LoginData | RegisterData): void
 }>()
 
 const router = useRouter()
@@ -170,16 +183,23 @@ const isPasswordValid = computed(() => {
 })
 
 const handleSubmit = () => {
-  if (props.isRegistration && !isPasswordValid.value) {
-    return
+  if (props.isRegistration) {
+    if (!isPasswordValid.value || !name.value) {
+      return
+    }
+    const data: RegisterData = {
+      name: name.value,
+      email: email.value,
+      password: password.value
+    }
+    emit('submit', data)
+  } else {
+    const data: LoginData = {
+      email: email.value,
+      password: password.value
+    }
+    emit('submit', data)
   }
-
-  const data = {
-    ...(props.isRegistration && { name: name.value }),
-    email: email.value,
-    password: password.value
-  }
-  emit('submit', data)
 }
 
 const handleSecondaryAction = () => {

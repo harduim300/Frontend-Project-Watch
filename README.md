@@ -1,39 +1,137 @@
-# matheus-harduim-teste-tecnico-watch
+# Watch Notion - Gerenciador de Tarefas
 
-This template should help get you started developing with Vue 3 in Vite.
+Sistema de gerenciamento de tarefas desenvolvido com Vue 3, TypeScript e Vuetify.
 
-## Recommended IDE Setup
+## 🚀 Tecnologias Utilizadas
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Vue 3
+- TypeScript
+- Vuetify
+- Tailwind CSS
+- Vue Router
+- Material Design Icons
 
-## Type Support for `.vue` Imports in TS
+## 📋 Funcionalidades
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- Autenticação de usuários
+- Criação, edição e exclusão de tarefas
+- Compartilhamento de tarefas com outros usuários
+- Sistema de permissões (Proprietário/Usuário)
+- Interface responsiva e moderna
+- Dashboard com cards de progresso
+- Filtros e busca de tarefas
 
-## Customize configuration
+## 🛠️ Configuração do Ambiente
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### Pré-requisitos
 
-## Project Setup
+- Node.js (versão LTS recomendada)
+- npm ou yarn
 
-```sh
+### Instalação
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/harduim300/Frontend-Project-Watch
+```
+
+2. Instale as dependências:
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
 
-```sh
+## 🚀 Executando o Projeto
+
+### Desenvolvimento
+
+```bash
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### Build para Produção
 
-```sh
+```bash
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
 
-```sh
-npm run lint
+## 📁 Estrutura do Projeto
+
 ```
+src/
+├── components/
+│   ├── layout/
+│   │   ├── HeaderVue.vue
+│   │   └── FooterVue.vue
+│   ├── ui/
+│   │   ├── AuthForm.vue
+│   │   ├── ButtonAct.vue
+│   │   ├── CardsTaks.vue
+│   │   ├── CreateTaskDialog.vue
+│   │   ├── DialogConfirm.vue
+│   │   ├── EditTaskDialog.vue
+│   │   └── ProgressCard.vue
+│   └── icons/
+│       └── IconLogo.vue
+├── services/
+│   ├── auth.ts
+│   └── tasks.ts
+├── views/
+│   ├── HomeView.vue
+│   ├── RegisterView.vue
+│   └── TaksView.vue
+└── router/
+    └── index.ts
+```
+
+## 🔒 Autenticação
+
+O sistema utiliza um sistema de autenticação baseado em tokens JWT, com as seguintes funcionalidades:
+
+- Login
+- Registro de usuários
+- Proteção de rotas
+- Persistência de sessão
+
+## 📝 Gerenciamento de Tarefas
+
+### Funcionalidades
+
+- Criação de tarefas com título, categoria, status e descrição
+- Edição de tarefas existentes
+- Exclusão de tarefas (apenas para proprietários)
+- Compartilhamento de tarefas com outros usuários
+- Sistema de status (Não Iniciado, Em Progresso, Concluído)
+
+### Permissões
+
+- **Proprietário**: Acesso total à tarefa
+- **Usuário**: Acesso limitado à visualização e edição
+
+## 🎨 Interface do Usuário
+
+### Componentes Principais
+
+- **HeaderVue**: Cabeçalho com logo e menu de usuário
+- **CardsTaks**: Cards para exibição de tarefas
+- **ProgressCard**: Cards para exibição de métricas
+- **DialogConfirm**: Diálogos de confirmação
+- **AuthForm**: Formulário de autenticação
+
+### Estilização
+
+- Utilização do Vuetify para componentes base
+- Tailwind CSS para estilos customizados
+- Design responsivo e moderno
+
+## 🔄 Rotas
+
+- `/`: Página inicial (login)
+- `/register`: Registro de usuários
+- `/tasks/dashboard`: Dashboard de tarefas
+
+
+## 👥 Autores
+
+- **Matheus Harduim** - [GitHub](https://github.com/harduim300)

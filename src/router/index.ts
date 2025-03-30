@@ -20,7 +20,7 @@ const router = createRouter({
     {
       path: '/tasks/dashboard',
       name: 'tasks-dashboard',
-      component: () => import('../views/TaksView.vue'),
+      component: () => import('../views/TasksView.vue'),
       meta: { requiresAuth: true }
     }
     // {
