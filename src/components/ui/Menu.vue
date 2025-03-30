@@ -5,7 +5,12 @@
     </template>
 
     <v-list>
-      <v-list-item v-for="(item, i) in items" :key="i" :value="i">
+      <v-list-item
+        v-for="(item, i) in items"
+        :key="i"
+        :value="i"
+        @click="item.onClick"
+      >
         <v-list-item-title>{{ item.title }}</v-list-item-title>
       </v-list-item>
     </v-list>
@@ -13,10 +18,17 @@
 </template>
 
 <script setup lang="ts">
+  import { authService } from '@/services/auth'
+  import { useRouter } from 'vue-router'
+
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    await authService.logout()
+    router.push('/')
+  }
+
   const items = [
-    { title: 'Click Me' },
-    { title: 'Click Me' },
-    { title: 'Click Me' },
-    { title: 'Click Me 2' },
+    { title: 'Sair', onClick: handleLogout }
   ]
 </script>
