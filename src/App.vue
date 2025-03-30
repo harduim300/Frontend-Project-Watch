@@ -8,7 +8,7 @@ import Footer from './components/layout/FooterVue.vue';
 </script>
 
 <template>
-  <div class="w-full h-auto flex flex-col justify-between bg-gradient-orange">
+  <div class="w-full min-h-screen h-auto flex flex-col justify-between bg-gradient-orange">
     <Header/>
     <RouterView />
     <Footer/>
