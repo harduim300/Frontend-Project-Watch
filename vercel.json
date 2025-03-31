@@ -11,7 +11,7 @@
     { "source": "/", "destination": "/" },
     { "source": "/register", "destination": "/register" },
     { "source": "/tasks/dashboard", "destination": "/tasks/dashboard" },
-    { "source": "/(.*)", "destination": "/:path*" }
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "build": {
     "env": {
