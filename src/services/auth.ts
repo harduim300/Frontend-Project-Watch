@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'https://back-end-projeto-watch-p86g.vercel.app'
+const API_URL = 'https://back-end-projeto-watch.vercel.app'
 
 // Configuração global do axios
 axios.defaults.withCredentials = true
