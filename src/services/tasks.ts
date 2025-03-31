@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:3000/tasks'
+const API_URL = 'https://back-end-projeto-watch-p86g.vercel.app/tasks'
 
 interface User {
   id: string
