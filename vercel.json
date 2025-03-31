@@ -1,8 +1,21 @@
 {
-  "rewrites": [
+  "headers": [
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
     }
-  ]
+  ],
+  "rewrites": [
+    { "source": "/", "destination": "/" },
+    { "source": "/register", "destination": "/register" },
+    { "source": "/tasks/dashboard", "destination": "/tasks/dashboard" },
+    { "source": "/(.*)", "destination": "/:path*" }
+  ],
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
 } 
